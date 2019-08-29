@@ -1,0 +1,37 @@
+<div class="card" >
+    <div class="card-header" 
+    [class.bg-success]="cour.offer"
+    [class.bg-primary]="!cour.offer">
+    <span *ngIf="cour.offer" class="badge badge-pill badge-danger">Offer</span>
+      {{cour.name}}
+      <a href="#" class="badge badge-danger" (click)="deleteCourse(cour)">X</a>
+    </div>
+
+    <img src="assets/course1.jpg" alt="Img">
+    <div class="card-body"
+    [style.color]="'white'"
+    [style.backgroundColor]= "cour.price > 3000? 'tomato':'goldenrod'">
+
+      <p class="card-text">Name : {{cour.name | uppercase }}</p>
+      <!-- <img [src]="cour.imgUrl"> -->
+      <p class="card-text">ID : {{cour.id}}</p>
+      <p class="card-text">Price : {{cour.price | currency:'INR':true:'4.2-2'}}</p>
+      <p class="card-text">Participants : {{cour.participants}}</p>
+      <p class="card-text">Rating : {{cour.rating | number:'1.2-3'}}</p>
+      <p class="card-text">LaunchDate : {{cour.launchDate | date:'mediumDate'}}</p>
+      <p class="card-text" *ngIf="cour.instructor">Instructor : {{cour.instructor | nameFormatter}}</p>
+      
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" (click)="register(cour)"
+        [disabled]="cour.participants >=20 "
+        [class.bg-warning]="cour.participants >=10 "
+        [class.bg-danger]="cour.participants >=15 "
+        > Register</button> 
+        <span  class="badge badge-pill badge-success" [class.bg-success]="cour.participants >0 && cour.participants < 10"
+          [class.bg-warning]="cour.participants >=10 && cour.participants < 15"
+          [class.bg-danger]="cour.participants >=15 && cour.participants < 20 "
+          >{{20-cour.participants}}  left</span>
+          
+      </div>
+  </div>
